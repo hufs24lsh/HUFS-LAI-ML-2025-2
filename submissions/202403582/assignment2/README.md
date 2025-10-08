@@ -64,6 +64,8 @@ learning_rates = [1e-4, 1e-3, 1e-2, 2e-3, 3e-3, 4e-3]
 를 통해 기존 학습률(0.001)을 포함한 총 6개의 학습률을 대상으로 실험을 진행하였다.
 
 - 결과:
+<img width="609" height="476" alt="image" src="https://github.com/user-attachments/assets/5e036f3f-3bbd-4c2b-b8e1-370f01359c06" />
+
 ```
 === 실험 1: Learning Rate 변화 ===
 LR=0.0001 → 정확도: 92.49%
@@ -95,6 +97,9 @@ for h in hidden_sizes:
 를 통해 위 학습률 변경 실험에서 정확도가 가장 높게 측정되었던 학습률인 2e-3(0.002)로 학습률을 설정하고, 기존 은닉층 크기인 100을 포함해 총 5개의 은닉층 크기를 이용해 실험을 진행해 보았다.
 
 - 결과:
+<img width="700" height="471" alt="image" src="https://github.com/user-attachments/assets/4c3de43c-64cb-4953-a509-7f2b6f8b4638" />
+
+
 ```
 === 실험 2: 은닉층 크기 변화 ===
 hidden=50 → 정확도: 96.76%
@@ -170,6 +175,9 @@ class MLP_PReLU(nn.Module):
 Dropout(0.3)을 추가하고, Epoch 수를 최대 50개로 설정해 둔 다음 Early Stopping을 추가하여 연속 두 Epoch 동안 개선이 없을 시 자동으로 중단하게 설정해 두어 Dropout과 Epoch에 대한 실험도 동시에 진행해 보았다.
 
 - 결과:
+<img width="777" height="548" alt="image" src="https://github.com/user-attachments/assets/7c7eac70-42a4-4d8a-82b2-79726b1aec0a" />
+
+
 ```
 === 실험 3: 모델 구조 개선(활성화 함수 변경, Dropout 추가) 및 에포크 수 증가 ===
 
