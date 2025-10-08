@@ -167,7 +167,7 @@ class MLP_PReLU(nn.Module):
         return self.layers(x)
 ```
 를 통해 위 학습률 변경 실험과 은닉층 크기 변경 실험에서 정확도가 가장 높게 측정되었던 학습률인 2e-3(0.002), 은닉층 크기인 300으로 학습률과 은닉층 크기를 설정하고, 기존 활성화 함수인 ReLU를 포함해 총 4개의 활성화 함수를 이용해 실험을 진행해 보았다.
-Dropout을 추가하고, Epoch 수를 최대 50개로 설정해 둔 다음 Early Stopping을 추가하여 연속 두 Epoch 동안 개선이 없을 시 자동으로 중단하게 설정해 두어 Dropout과 Epoch에 대한 실험도 동시에 진행해 보았다.
+Dropout(0.3)을 추가하고, Epoch 수를 최대 50개로 설정해 둔 다음 Early Stopping을 추가하여 연속 두 Epoch 동안 개선이 없을 시 자동으로 중단하게 설정해 두어 Dropout과 Epoch에 대한 실험도 동시에 진행해 보았다.
 
 - 결과:
 ```
