@@ -1,7 +1,7 @@
-# Assignment 4: Data Collection & Analysis  
+# 4th Assignment: Data Collection and Analysis
 본 문서는 Assignment 4 제출물의 README(분석 결과 요약본)입니다.  
 이 프로젝트는 AI Hub “한국어 대학 강의 데이터”를 기반으로, 이후 Assignment 5에서 사용할  
-**강의자료 자동 요약 및 핵심 포인트 추출기** 모델의 데이터 이해를 위한 탐색적 분석(EDA)을 수행합니다.
+**강의자료 자동 요약 및 핵심 포인트 추출기** 모델의 데이터 이해를 위한 탐색적 분석(EDA)을 수행했습니다.
 
 ---
 
@@ -38,7 +38,7 @@
 # 3. 수행한 EDA 요약
 
 ## (1) 데이터 로드 및 기본 정보 확인
-- 데이터 크기: (122,144, 3)  
+- 데이터 크기: (122144, 3)  
 - 모든 컬럼 object 타입  
 - 강의별 문장 수 분포 다양
 
