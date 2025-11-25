@@ -68,7 +68,8 @@
 → max_length는 128~256 token 수준으로 설정해도 적절  
 → 극단적 길이(outlier) 존재 → truncate 기준 필요
 
-**시각화 포함**  
+**시각화 포함**
+<img width="589" height="455" alt="image" src="https://github.com/user-attachments/assets/7065f698-9596-4b61-8406-04c7a5844366" />
 - 문장 길이 히스토그램
 
 ---
@@ -79,7 +80,7 @@
 - 상위 20개 강의가 전체 데이터 비중의 상당 부분 차지
 
 **발견 및 영향**  
-→ 강의 간 심한 불균형 존재  
+→ 강의 간 약간의 불균형 존재  
 → 특정 강의 스타일에 모델이 편향될 위험  
 → stratified split, down/oversampling 고려 필요
 
