@@ -12,7 +12,7 @@
 - 링크: https://www.aihub.or.kr/aihubdata/data/view.do?dataSetSn=71627
 
 ## 1-2. 사용한 데이터 범위
-본 프로젝트에서는 전체 TL.zip(라벨 데이터셋) 중 다음 조건에 해당하는 데이터만 사용함.
+전체 TL.zip(라벨 데이터셋) 중 다음 조건에 해당하는 데이터만 사용함.
 
 - TL.zip.part0 / TL.zip.part1 병합 → TL.zip 생성  
 - TL.zip 내부에서 **eng/comp/** (컴퓨터통신) 카테고리만 선택적 추출  
@@ -68,24 +68,30 @@
 → max_length는 128~256 token 수준으로 설정해도 적절  
 → 극단적 길이(outlier) 존재 → truncate 기준 필요
 
-**시각화 포함**
-<img width="589" height="455" alt="image" src="https://github.com/user-attachments/assets/7065f698-9596-4b61-8406-04c7a5844366" />
+**시각화 포함**  
+<img width="589" height="455" alt="image" src="https://github.com/user-attachments/assets/098337ff-04c0-4098-b09f-9a45774ba001" />
 - 문장 길이 히스토그램
 
 ---
 
 ## (4) 강의(lecture_id) 단위 분포 분석
-- lecture_id 총 367개  
-- 최다 1,400문장 이상, 최저 100문장 이하  
-- 상위 20개 강의가 전체 데이터 비중의 상당 부분 차지
+describe() 기반 강의별 문장 수 통계:
+
+- lecture_id 총 **367개**  
+- 최소: **76문장**  
+- 최대: **1,433문장**  
+- 평균: **332.8문장**
+
+이는 **강의 간 문장 수가 크게 차이나는 불균형 구조**를 나타냄.
 
 **발견 및 영향**  
-→ 강의 간 약간의 불균형 존재  
-→ 특정 강의 스타일에 모델이 편향될 위험  
+→ 특정 강의가 데이터의 상당 부분을 차지  
+→ 모델이 특정 강의 스타일에 편향될 위험  
 → stratified split, down/oversampling 고려 필요
 
 **시각화 포함**  
-- 강의별 문장 수 Top 20 bar chart
+<img width="549" height="374" alt="image" src="https://github.com/user-attachments/assets/a71be173-5106-4990-933b-0b2ac60595a7" />
+- 전체 boxplot
 
 ---
 
@@ -127,14 +133,14 @@
 → 모델 편향 발생 가능  
 → deduplication 필요
 
-## (2) 강의 간 문장 수 불균형
+## (2) 강의 간 문장 수 불균형 (76 ~ 1433문장)
 → 데이터 편향 심화  
 → sampling 전략 필요
 
-## (3) filler word 과다
+## (3) filler word 과다  
 → 불용어 리스트 커스터마이징 필요
 
-## (4) 긴 문장 outlier 존재
+## (4) 긴 문장 outlier 존재  
 → max_length 초과 위험  
 → truncate/분할 전략 필요
 
