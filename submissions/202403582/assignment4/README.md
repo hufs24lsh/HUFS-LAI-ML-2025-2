@@ -69,6 +69,7 @@
 → 극단적 길이(outlier) 존재 → truncate 기준 필요
 
 <img width="589" height="455" alt="image" src="https://github.com/user-attachments/assets/098337ff-04c0-4098-b09f-9a45774ba001" />
+
 - 문장 길이 히스토그램
 
 ---
@@ -89,7 +90,12 @@ describe() 기반 강의별 문장 수 통계:
 → stratified split, down/oversampling 고려 필요
 
 <img width="549" height="374" alt="image" src="https://github.com/user-attachments/assets/a71be173-5106-4990-933b-0b2ac60595a7" />
+
 - 전체 boxplot
+
+<img width="841" height="470" alt="image" src="https://github.com/user-attachments/assets/4b547aab-310e-47e3-9951-9ef3a8cfd29d" />
+
+- lecture별 문장 수 히스토그램
 
 ---
 
