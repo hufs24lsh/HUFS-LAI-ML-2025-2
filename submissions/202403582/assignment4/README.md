@@ -138,8 +138,8 @@ describe() 기반 강의별 문장 수 통계:
 → deduplication 필요
 
 ## (2) 강의 간 문장 수 불균형 (76 ~ 1433문장)
-→ 데이터 편향 심화  
-→ sampling 전략 필요
+→ 강의 간 문장 수 차이가 크므로
+→ train/validation split 시 강의 단위 불균형을 고려해야 함
 
 ## (3) filler word 과다  
 → 불용어 리스트 커스터마이징 필요
