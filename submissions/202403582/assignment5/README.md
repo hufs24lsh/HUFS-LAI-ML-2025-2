@@ -344,7 +344,7 @@ Inference Notebook(`inference.ipynb`)에서는 다음을 수행한다:
 
 ---
 
-# 11.1 모델 및 벡터 로드
+## 11.1 모델 및 벡터 로드
 
 ```python
 model = joblib.load("final_model.pkl")
@@ -353,7 +353,7 @@ tfidf = joblib.load("tfidf_vectorizer.pkl")
 
 ---
 
-# 11.2 전처리 함수 (Training과 동일)
+## 11.2 전처리 함수 (Training과 동일)
 
 ```python
 def preprocess(text):
@@ -369,7 +369,7 @@ def preprocess(text):
 
 ---
 
-# 11.3 단일 문장 추론
+## 11.3 단일 문장 추론
 
 ```python
 pred, prob = predict_sentence("이번 알고리즘의 핵심 아이디어는 ...")
@@ -383,7 +383,7 @@ pred, prob = predict_sentence("이번 알고리즘의 핵심 아이디어는 ...
 
 ---
 
-# 11.4 여러 문장 리스트(batch) 추론
+## 11.4 여러 문장 리스트(batch) 추론
 
 예시 입력:
 
@@ -407,7 +407,7 @@ example_sentences = [
 
 ---
 
-# 11.5 긴 텍스트 자동 분리 + 핵심문장 추출 Demo
+## 11.5 긴 텍스트 자동 분리 + 핵심문장 추출 Demo
 
 inference.ipynb에 구현 완료.
 
@@ -437,7 +437,7 @@ threshold=0.06 이상만 핵심 문장으로 선택
 
 ---
 
-# 11.6 모델의 추론 정확도 분석
+## 11.6 모델의 추론 정확도 분석
 
 | 구분 | 설명 |
 |------|-------|
@@ -450,7 +450,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 
 ---
 
-# 11.7 Threshold 설정 이유
+## 11.7 Threshold 설정 이유
 
 기본 threshold=0.5 대신 **0.06**을 사용한 이유:
 
