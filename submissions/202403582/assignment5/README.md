@@ -518,6 +518,8 @@ https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sha
 
 따라서 **Inference 단계만으로도 완전히 동일한 결과를 재현**할 수 있다.
 
+(즉, inference 코드만으로도 모델 실제 실행 및 평가가 가능하다.)
+
 아래 과정을 그대로 수행하면 모델을 재현할 수 있다.
 
 ### Step 1 — 모델 및 벡터 로드
