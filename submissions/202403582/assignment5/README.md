@@ -1,9 +1,10 @@
 # 5th Assignment: Model Training and Evaluation
-**Project: 강의자료 자동 요약 및 핵심 포인트 추출기**
 
 ---
 
 # 1. 프로젝트 개요
+
+**Project: 강의자료 자동 요약 및 핵심 포인트 추출기**
 
 이 프로젝트는 Assignment 4에서 수집한 **컴퓨터 통신 카테고리의 한국어 대학 강의 전사 데이터(115,890 문장)**를 기반으로  
 강의자료에서 **핵심 문장(1) vs 비핵심 문장(0)** 을 자동으로 분류하는 모델을 구축하는 것이 목표이다.
@@ -129,13 +130,35 @@ TfidfVectorizer(
 
 ---
 
-# 6. 모델 설계 및 학습
+# 6. 모델 아키텍처
+
+본 프로젝트의 최종 모델은 **TF-IDF 기반 Bag-of-Words 벡터 표현 + Logistic Regression**으로 구성된다.
+
+- **TF-IDF Vectorizer**  
+  - max_features=40,000  
+  - ngram_range=(1,2)  
+  - min_df=5, max_df=0.9  
+  - 약 33k 차원의 sparse vector 생성  
+
+- **Logistic Regression Classifier**  
+  - class_weight="balanced" (극단적 클래스 불균형 대응)  
+  - max_iter=300  
+  - decision boundary 기반 linear classifier  
+  - 핵심문장(1)에 대한 recall 확보에 유리  
+
+이 아키텍처는 대규모 강의 전사 데이터에서  
+“핵심 단어/구 기반으로 독립적 문장 판단”이 필요한 본 과제 성격과 적합하다.
+
+
+---
+
+# 7. 모델 설계 및 학습
 
 모델 후보는 크게 두 가지를 실험하였다.
 
 ---
 
-## 6.1 Logistic Regression (최종 선택 모델)
+## 7.1 Logistic Regression (최종 선택 모델)
 
 하이퍼파라미터:
 
@@ -159,7 +182,7 @@ Validation 성능:
 
 ---
 
-## 6.2 MLPClassifier
+## 7.2 MLPClassifier
 
 하이퍼파라미터:
 
@@ -206,7 +229,7 @@ final_model.pkl
 
 ---
 
-# 7. 최종 Test 성능 (Weak Label 기준)
+# 8. 최종 Test 성능 (Weak Label 기준)
 
 최종 선택된 Logistic Regression 모델을 Test Set(11,589문장)에 적용하였다.  
 Test 데이터는 학습 및 검증에 *전혀 사용되지 않은* 완전 분리된 데이터이다.
@@ -234,7 +257,7 @@ Macro F1:           0.6200
 
 ---
 
-# 8. Human Label(200개) 평가
+# 9. Human Label(200개) 평가
 
 Weak label은 자동 생성 요약이며 완벽하지 않기 때문에  
 직접 라벨링한 **200개 Human Label**로 모델의 실제 적합성을 평가하였다.
@@ -284,7 +307,7 @@ Macro F1:           0.5244
 
 ---
 
-# 9. 주요 분석 요약
+# 10. 주요 분석 요약
 
 - Weak 기준에서는 Macro F1이 **0.62**로 준수  
 - Human 기준에서는 **0.52**로 하락  
@@ -296,7 +319,7 @@ Weak supervision 기반 baseline model로는 의미적 핵심문장 추출의 �
 
 ---
 
-# 10. 추론(Inference)
+# 11. 추론(Inference)
 
 Inference Notebook(`inference.ipynb`)에서는 다음을 수행한다:
 
@@ -307,7 +330,7 @@ Inference Notebook(`inference.ipynb`)에서는 다음을 수행한다:
 
 ---
 
-# 10.1 모델 및 벡터 로드
+# 11.1 모델 및 벡터 로드
 
 ```python
 model = joblib.load("final_model.pkl")
@@ -316,7 +339,7 @@ tfidf = joblib.load("tfidf_vectorizer.pkl")
 
 ---
 
-# 10.2 전처리 함수 (Training과 동일)
+# 11.2 전처리 함수 (Training과 동일)
 
 ```python
 def preprocess(text):
@@ -332,7 +355,7 @@ Training과 완전히 동일한 stopwords 리스트를 사용하여
 
 ---
 
-# 10.3 단일 문장 추론
+# 11.3 단일 문장 추론
 
 ```python
 pred, prob = predict_sentence("이번 알고리즘의 핵심 아이디어는 ...")
@@ -346,7 +369,7 @@ pred, prob = predict_sentence("이번 알고리즘의 핵심 아이디어는 ...
 
 ---
 
-# 10.4 여러 문장 리스트(batch) 추론
+# 11.4 여러 문장 리스트(batch) 추론
 
 예시 입력:
 
@@ -370,7 +393,7 @@ example_sentences = [
 
 ---
 
-# 10.5 긴 텍스트 자동 분리 + 핵심문장 추출 Demo
+# 11.5 긴 텍스트 자동 분리 + 핵심문장 추출 Demo
 
 사용 흐름:
 
@@ -384,10 +407,10 @@ example_sentences = [
 threshold=0.06 이상만 핵심 문장으로 선택
 ```
 
-### ✔ 데모 입력 예시  
+### 데모 입력 예시  
 (경사하강법 강의 텍스트 9문장 입력)
 
-### ✔ 추출 결과 (4문장)
+### 추출 결과 (4문장)
 
 ```
 [1] 오늘은 경사하강법의 핵심 아이디어를 살펴보겠습니다. (0.2866)
@@ -398,7 +421,7 @@ threshold=0.06 이상만 핵심 문장으로 선택
 
 ---
 
-# 10.6 모델의 추론 정확도 분석
+# 11.6 모델의 추론 정확도 분석
 
 | 구분 | 설명 |
 |------|-------|
@@ -411,7 +434,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 
 ---
 
-# 10.7 Threshold 설정 이유
+# 11.7 Threshold 설정 이유
 
 기본 threshold=0.5 대신 **0.06**을 사용한 이유:
 
@@ -421,7 +444,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 
 --- 
 
-# 11. 모델 가중치 저장 위치
+# 12. 모델 가중치 저장 위치
 
 학습이 완료된 최종 모델과 TF-IDF 벡터는 다음 파일로 저장되어 있다.
 
@@ -436,7 +459,7 @@ https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sha
 ```
 ---
 
-# 12. 프로젝트 한계 및 개선 방향
+# 13. 프로젝트 한계 및 개선 방향
 
 ## 한계점
 
@@ -472,34 +495,34 @@ https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sha
 
 ---
 
-# 13. 재현 (Reproducibility)
+# 14. 재현 (Reproducibility)
 
 본 프로젝트의 최종 모델은 `final_model.pkl`과 `tfidf_vectorizer.pkl`을 사용하여  
 **Inference 단계만으로도 완전히 재현이 가능**하도록 구성되어 있다.
 
 아래 과정을 그대로 수행하면 모델을 재현할 수 있다.
 
-### ✔ Step 1 — 모델 및 벡터 로드
+### Step 1 — 모델 및 벡터 로드
 ```python
 model = joblib.load("final_model.pkl")
 tfidf = joblib.load("tfidf_vectorizer.pkl")
 ```
 
-### ✔ Step 2 — 전처리 함수 적용
+### Step 2 — 전처리 함수 적용
 Training과 동일한 규칙의 `preprocess()` 함수를 사용해 입력 문장을 정규화한다.
 
-### ✔ Step 3 — TF-IDF 변환
+### Step 3 — TF-IDF 변환
 ```python
 vec = tfidf.transform([clean_sentence])
 ```
 
-### ✔ Step 4 — 예측 실행
+### Step 4 — 예측 실행
 ```python
 prob = model.predict_proba(vec)[0][1]
 pred = 1 if prob >= threshold else 0
 ```
 
-### ✔ Step 5 — 긴 텍스트 요약(선택)
+### Step 5 — 긴 텍스트 요약(선택)
 문장 단위로 자동 분리한 뒤 batch 추론을 수행하여  
 threshold 이상인 문장만 핵심 문장으로 필터링한다.
 
