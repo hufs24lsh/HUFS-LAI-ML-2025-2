@@ -544,6 +544,8 @@ pred = 1 if prob >= threshold else 0
 문장 단위로 자동 분리한 뒤 batch 추론을 수행하여  
 threshold 이상인 문장만 핵심 문장으로 필터링한다.
 
+(inference.ipynb에서 체험 가능)
+
 ---
 
 # 결론
