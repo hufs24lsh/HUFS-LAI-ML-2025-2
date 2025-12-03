@@ -6,12 +6,14 @@
 
 **Project: 강의자료 자동 요약 및 핵심 포인트 추출기**
 
-이 프로젝트는 Assignment 4에서 수집한 **컴퓨터 통신 카테고리의 한국어 대학 강의 전사 데이터(115,890 문장)**를 기반으로  
+이 프로젝트는 Assignment 4에서 수집한 **컴퓨터 통신 카테고리의 한국어 대학 강의 전사 데이터(115,890 문장)** 를 기반으로  
 강의자료에서 **핵심 문장(1) vs 비핵심 문장(0)** 을 자동으로 분류하는 모델을 구축하는 것이 목표이다.
 
 핵심 목표는 다음과 같다:
 
-- **재현 가능한 TF-IDF + Logistic Regression or MLP Classifier 기반 분류기 완성**
+- Weak supervision 기반 핵심문장 분류용 baseline 모델 구축
+- TF-IDF + Logistic Regression 파이프라인을 재현 가능하게 구현
+- 비교 실험(MLP 포함)을 통해 최종 모델 선택
 
 ---
 
@@ -57,12 +59,24 @@ Training/Infernce 전처리를 완전히 통일:
 
 Stopwords 예시:
 ```
-["어","음","자","뭐","요","네","막","그냥","근데","그죠","거죠","예",
-"이거","이게","이건","그거","그게","저거",
-"합니다","됩니다","보겠습니다","할게요","있습니다","있어요","있죠",
-"이","그","저","을","를","은","는","에","에서","로","것","거"]
+    # 1) filler / 말버릇
+    "어", "음", "자", "뭐", "요", "네", "막", "그냥",
+    "근데", "그죠", "거죠", "예",
+
+    # 2) 지시어 (정보 없음)
+    "이거", "이게", "이건", "그거", "그게",
+    "저거", "요거", "요게", "얘는",
+
+    # 3) 공손/형식적 표현
+    "합니다", "되었습니다", "됩니다", "하겠습니다",
+    "해주세요", "드릴", "보겠습니다", "할게요",
+    "있습니다", "있어요", "있죠",
+
+    # 4) 기능어 (기본 조사)
+    "이", "그", "저", "을", "를", "은", "는", "에",
+    "에서", "로", "것", "거", "건", "것들",
 ```
-등등
+
 빈도 TOP 300 안에서
 
 1) filler / 말버릇
@@ -350,7 +364,7 @@ def preprocess(text):
     return " ".join(tokens)
 ```
 
-Training과 완전히 동일한 stopwords 리스트를 사용하여  
+추가로 Training과 완전히 동일한 stopwords 리스트를 사용하여  
 추론 시 데이터 누락 문제를 방지하였다.
 
 ---
@@ -394,6 +408,8 @@ example_sentences = [
 ---
 
 # 11.5 긴 텍스트 자동 분리 + 핵심문장 추출 Demo
+
+inference.ipynb에 구현 완료.
 
 사용 흐름:
 
@@ -453,7 +469,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 | `final_model.pkl` | Logistic Regression 모델 |
 | `tfidf_vectorizer.pkl` | TF-IDF 벡터라이저 |
 
-📁 저장 경로 (Google Drive)  
+저장 경로 (Google Drive)  
 ```
 https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sharing
 ```
@@ -497,8 +513,10 @@ https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sha
 
 # 14. 재현 (Reproducibility)
 
-본 프로젝트의 최종 모델은 `final_model.pkl`과 `tfidf_vectorizer.pkl`을 사용하여  
-**Inference 단계만으로도 완전히 재현이 가능**하도록 구성되어 있다.
+본 프로젝트의 학습 코드는 `training.ipynb`에 포함되어 있으며,  
+학습 완료 후 생성된 `final_model.pkl`과 `tfidf_vectorizer.pkl`은 별도로 저장되어 있다.  
+
+따라서 **Inference 단계만으로도 완전히 동일한 결과를 재현**할 수 있다.
 
 아래 과정을 그대로 수행하면 모델을 재현할 수 있다.
 
@@ -528,7 +546,7 @@ threshold 이상인 문장만 핵심 문장으로 필터링한다.
 
 ---
 
-# ✔ 결론
+# 결론
 
 본 프로젝트는 대규모 강의 전사 데이터 기반으로  
 **Weak-supervision 방식의 핵심 문장 자동 추출 모델**을 성공적으로 구축하였다.
@@ -542,3 +560,5 @@ threshold 이상인 문장만 핵심 문장으로 필터링한다.
 훨씬 높은 품질의 강의 자동 요약이 가능할 것이다.
 
 ---
+
+본 과제 수행 과정에서 training 및 시각화 코드 구현을 위해 ChatGPT를 활용하였으며, 최종 검토 및 작성은 직접 수행하였음을 명시합니다.
