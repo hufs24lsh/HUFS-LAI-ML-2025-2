@@ -460,7 +460,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 
 --- 
 
-# 12. 모델 가중치 저장 위치
+# 12. 모델 가중치 및 프로젝트에 사용한 전체 데이터 저장 위치
 
 학습이 완료된 최종 모델과 TF-IDF 벡터는 다음 파일로 저장되어 있다.
 
@@ -469,7 +469,7 @@ Weak label 기반 모델이므로 의미 기반 핵심문장과 완전히 일치
 | `final_model.pkl` | Logistic Regression 모델 |
 | `tfidf_vectorizer.pkl` | TF-IDF 벡터라이저 |
 
-저장 경로 (Google Drive)  
+모든 데이터 저장 경로 (Google Drive)  
 ```
 https://drive.google.com/drive/folders/18HSH9mSw2qBkw8q-ODQo7X6yus5DKQqw?usp=sharing
 ```
