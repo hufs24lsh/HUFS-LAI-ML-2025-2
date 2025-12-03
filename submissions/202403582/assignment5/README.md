@@ -29,7 +29,7 @@
   - `sentence`  
   - `clean_sentence`
 - Weak label은 Lecture 단위 TF-IDF 중앙성 기반 자동 생성
-  - weak_train.csv, weak_valid.csv, weak_test.csv
+  - `weak_train.csv`, `weak_valid.csv`, `weak_test.csv`
 
 직접 라벨링 데이터
 - 총 문장 수: **200**
@@ -38,7 +38,7 @@
   - `sentence`  
   - `label`  
 - 랜덤으로 200문장 추출 후, 직접 핵심 문장 여부 라벨링
-  - human_label.csv
+  - `human_label.csv`
 
 ---
 
