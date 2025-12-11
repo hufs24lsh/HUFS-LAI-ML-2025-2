@@ -29,7 +29,7 @@ https://huggingface.co/spaces/hufs24lsh/ML-lecsum
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 final/
